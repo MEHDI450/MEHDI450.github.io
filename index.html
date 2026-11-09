@@ -1,739 +1,574 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mehdi Boutmizgida - Data Engineer & Full-Stack Developer</title>
+    <title>Mehdi Boutmizgida - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0f172a',
+                        darker: '#0b1120',
+                        card: '#1e293b',
+                        accent: '#38bdf8',
+                        accentDark: '#0284c7'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #1F4788;
-            --primary-light: #2D5BA3;
-            --accent: #00D4FF;
-            --accent-dark: #0099CC;
-            --dark: #0F1419;
-            --dark-secondary: #1A1F2E;
-            --light: #F0F4F8;
-            --text-primary: #FFFFFF;
-            --text-secondary: #B8BEC7;
-            --success: #00D98E;
-            --warning: #FFB800;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-secondary) 100%);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
+            background-color: #0b1120;
+            color: #e2e8f0;
+        }
+        
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 20, 25, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--primary-light) 100%);
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 60px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-50px, -50px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 800px;
-            text-align: center;
-            animation: slideUp 0.8s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero .highlight {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--primary-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--primary-light) 100%);
-            color: var(--dark);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 5rem 2rem;
-            position: relative;
-        }
-
-        section h2 {
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        section h2::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
-            margin: 1rem auto 0;
-        }
-
-        /* Skills Section */
-        .skills {
-            background: rgba(45, 91, 163, 0.05);
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .skill-card {
-            background: rgba(26, 31, 46, 0.8);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
+        .card-hover {
             transition: all 0.3s ease;
-            cursor: pointer;
         }
-
-        .skill-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
-        }
-
-        .skill-card h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .skill-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
-
-        /* Projects Section */
-        .projects {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .project-card {
-            background: rgba(26, 31, 46, 0.8);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-15px);
-            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.15);
-        }
-
-        .project-header {
-            background: linear-gradient(135deg, rgba(31, 71, 136, 0.3) 0%, rgba(0, 212, 255, 0.1) 100%);
-            padding: 2rem;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .project-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card h3 {
-            color: var(--accent);
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .tech-tag {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--accent);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .project-description {
-            padding: 2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-description p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
-
-        .project-highlights {
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .project-highlights li {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-            margin-left: 1.2rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: rgba(45, 91, 163, 0.05);
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contact-item a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            color: var(--primary-light);
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(15, 20, 25, 0.95);
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 2rem;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            section h2 {
-                font-size: 2rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info {
-                flex-direction: column;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Scroll to top button */
-        .scroll-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--primary-light) 100%);
-            border: none;
-            border-radius: 50%;
-            color: var(--dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-
-        .scroll-top.show {
-            display: flex;
-        }
-
-        .scroll-top:hover {
+        
+        .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        /* Timeline styles */
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #38bdf8;
+            border: 4px solid #0f172a;
+            position: absolute;
+            left: -8px;
+            top: 6px;
+        }
+
+        /* Background glow effect */
+        .glow-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, rgba(11,17,32,0) 70%);
+            top: -200px;
+            left: -200px;
+            z-index: -1;
+            pointer-events: none;
         }
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-accent selection:text-darker">
+
+    <div class="glow-bg"></div>
+
     <!-- Navigation -->
-    <nav>
-        <div class="logo">MB</div>
-        <ul class="nav-links">
-            <li><a href="#home">Accueil</a></li>
-            <li><a href="#skills">Compétences</a></li>
-            <li><a href="#projects">Projets</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold tracking-tighter gradient-text">MB.</a>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-300 hover:text-accent transition-colors text-sm font-medium">À Propos</a>
+                    <a href="#skills" class="text-gray-300 hover:text-accent transition-colors text-sm font-medium">Compétences</a>
+                    <a href="#experience" class="text-gray-300 hover:text-accent transition-colors text-sm font-medium">Expérience</a>
+                    <a href="#projects" class="text-gray-300 hover:text-accent transition-colors text-sm font-medium">Projets</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark border-b border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent hover:bg-gray-800">À Propos</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent hover:bg-gray-800">Compétences</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent hover:bg-gray-800">Expérience</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent hover:bg-gray-800">Projets</a>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Mehdi <span class="highlight">Boutmizgida</span></h1>
-            <p>Data Engineer & Full-Stack Developer</p>
-            <p style="font-size: 1rem; margin-bottom: 2.5rem;">Création de solutions logicielles robustes et systèmes data-driven</p>
-            <a href="#projects" class="cta-button">Voir mes projets</a>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <h2>Compétences Techniques</h2>
-        <div class="skills-grid">
-            <div class="skill-card fade-in">
-                <h3>📊 Data & Analytics</h3>
-                <p>Python • SQL (MySQL, T-SQL) • Business Intelligence • Data Warehouse • ETL • Excel</p>
-            </div>
-            <div class="skill-card fade-in">
-                <h3>🌐 Développement Web</h3>
-                <p>PHP • JavaScript • HTML5/CSS3 • Backend & Frontend • MySQL • RESTful APIs • Streamlit</p>
-            </div>
-            <div class="skill-card fade-in">
-                <h3>🤖 IA & Systèmes Distribués</h3>
-                <p>CrewAI • Gemini API • Agents Multi-Agents • Google Sheets API • Gmail API • MCP</p>
-            </div>
-            <div class="skill-card fade-in">
-                <h3>💻 Programmation</h3>
-                <p>C++ • POO • Structures de données • Algorithmes • Tkinter • Architecture MVC</p>
-            </div>
-            <div class="skill-card fade-in">
-                <h3>🛠️ Outils & Méthodes</h3>
-                <p>Git/GitHub • Gestion de projet • Modélisation de données • Travail agile • Documentation</p>
-            </div>
-            <div class="skill-card fade-in">
-                <h3>🎓 Formation</h3>
-                <p>DUT Ingénierie des Données • EST-USMBA Fès • 2024-2026</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <h2>Projets Principaux</h2>
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <div class="project-card fade-in">
-                <div class="project-header">
-                    <div class="project-icon">🚚</div>
-                    <h3>Logistique-Maroc-Pro</h3>
-                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Application Desktop</p>
-                </div>
-                <div class="project-description">
-                    <p><strong>Description :</strong> Solution logicielle complète pour l'optimisation de la gestion du transport et de la supply chain au Maroc.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Tkinter</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">MVC</span>
-                    </div>
-                    <div class="project-highlights">
-                        <p><strong>Highlights :</strong></p>
-                        <ul>
-                            <li>Interface graphique intuitive avec suivi temps réel</li>
-                            <li>Système multi-utilisateurs avec contrôle d'accès</li>
-                            <li>Reporting automatisé et gestion avancée</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="project-card fade-in">
-                <div class="project-header">
-                    <div class="project-icon">📊</div>
-                    <h3>SQL Data Warehouse</h3>
-                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">BI Analytics</p>
-                </div>
-                <div class="project-description">
-                    <p><strong>Description :</strong> Entrepôt de données relationnel avec architecture en étoile pour l'analyse décisionnelle.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">T-SQL</span>
-                        <span class="tech-tag">Star Schema</span>
-                        <span class="tech-tag">BI</span>
-                        <span class="tech-tag">Analytics</span>
-                    </div>
-                    <div class="project-highlights">
-                        <p><strong>Highlights :</strong></p>
-                        <ul>
-                            <li>Modélisation dimensionnelle optimisée</li>
-                            <li>Requêtes complexes et vues analytiques</li>
-                            <li>Performances reporting accrues</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="project-card fade-in">
-                <div class="project-header">
-                    <div class="project-icon">🏥</div>
-                    <h3>Triage Médical Multi-Agents</h3>
-                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">IA Distribuée</p>
-                </div>
-                <div class="project-description">
-                    <p><strong>Description :</strong> Application web de triage médical autonome basée sur IA multi-agents avec CrewAI et Gemini.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">CrewAI</span>
-                        <span class="tech-tag">Gemini API</span>
-                        <span class="tech-tag">Streamlit</span>
-                        <span class="tech-tag">Multi-Agents</span>
-                    </div>
-                    <div class="project-highlights">
-                        <p><strong>Highlights :</strong></p>
-                        <ul>
-                            <li>Architecture Agent-to-Agent avancée</li>
-                            <li>Intégration Google Sheets & Gmail</li>
-                            <li>Alertes critiques temps réel</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 4 -->
-            <div class="project-card fade-in">
-                <div class="project-header">
-                    <div class="project-icon">🤖</div>
-                    <h3>Antigravity-Agent</h3>
-                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Expert System</p>
-                </div>
-                <div class="project-description">
-                    <p><strong>Description :</strong> Système expert d'analyse gravitationnelle pour modélisation de propulsion aérospatiale.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Physique IA</span>
-                        <span class="tech-tag">JSON Output</span>
-                        <span class="tech-tag">Analyse</span>
-                    </div>
-                    <div class="project-highlights">
-                        <p><strong>Highlights :</strong></p>
-                        <ul>
-                            <li>Moteur physique avancé avec IA</li>
-                            <li>Protocoles multi-propulsion</li>
-                            <li>Risk analyzer intégré</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 5 -->
-            <div class="project-card fade-in">
-                <div class="project-header">
-                    <div class="project-icon">🌍</div>
-                    <h3>Site Web Touristique</h3>
-                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Web Dynamique</p>
-                </div>
-                <div class="project-description">
-                    <p><strong>Description :</strong> Portail web dynamique pour la promotion du tourisme au Maroc avec gestion administrative.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">PHP</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">HTML/CSS</span>
-                        <span class="tech-tag">Responsive</span>
-                    </div>
-                    <div class="project-highlights">
-                        <p><strong>Highlights :</strong></p>
-                        <ul>
-                            <li>Système de réservation complet</li>
-                            <li>Cartes interactives et galeries</li>
-                            <li>Optimisation UX/SEO</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 6 -->
-            <div class="project-card fade-in">
-                <div class="project-header">
-                    <div class="project-icon">🏢</div>
-                    <h3>Azrou Sani SARL</h3>
-                    <p style="color: var(--text-secondary); margin: 0; font-size: 0.9rem;">Site Commercial</p>
-                </div>
-                <div class="project-description">
-                    <p><strong>Description :</strong> Site web professionnel complet pour la société Azrou Sani développé en stage.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">PHP</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">Backend</span>
-                        <span class="tech-tag">Admin</span>
-                    </div>
-                    <div class="project-highlights">
-                        <p><strong>Highlights :</strong></p>
-                        <ul>
-                            <li>Architecture backend robuste</li>
-                            <li>Formulaires dynamiques avancés</li>
-                            <li>Gestion administrative complète</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="contact-content">
-            <h2>Contactez-moi</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">
-                Intéressé par une collaboration ? Parlons de votre projet !
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <p class="text-accent font-medium tracking-wide mb-4 uppercase text-sm">Bonjour, je m'appelle</p>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+                Mehdi <span class="gradient-text">Boutmizgida</span>
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-medium text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Élève-Ingénieur en Science et Ingénierie des Données (SID) & Développeur Freelance
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-lg">
+                Passionné par la Data, l'Intelligence Artificielle et le développement Full-Stack. Actuellement en cycle d'ingénieur à l'ENIAD après un DUT en Ingénierie des Données à l'EST Fès.
             </p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <strong>📧 Email</strong>
-                    <a href="mailto:boutmizgidam@gmail.com">boutmizgidam@gmail.com</a>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#projects" class="px-8 py-4 bg-accent hover:bg-accentDark text-darker font-bold rounded-lg transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fas fa-rocket"></i> Voir mes projets
+                </a>
+                <a href="https://github.com/MEHDI450" target="_blank" class="px-8 py-4 bg-transparent border border-gray-600 hover:border-gray-400 text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fab fa-github text-xl"></i> GitHub
+                </a>
+                <a href="https://mehdi450.github.io/" target="_blank" class="px-8 py-4 bg-transparent border border-accent/50 text-accent hover:border-accent font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fas fa-globe text-xl"></i> Web Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- À Propos Section -->
+    <section id="about" class="py-24 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">À Propos de moi</h2>
+                <div class="h-px bg-gray-700 flex-1"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-gray-400 text-lg leading-relaxed">
+                    <p>
+                        Actuellement <strong class="text-white font-medium">Élève-Ingénieur en Science et Ingénierie des Données</strong> à l'ENIAD Berkane, 
+                        je possède une solide base technique grâce à mon <strong class="text-white font-medium">DUT en Ingénierie des Données</strong> obtenu à l'EST Fès.
+                    </p>
+                    <p>
+                        Je suis passionné par l'univers du <strong>Big Data</strong> et les <strong>Architectures d'IA</strong>. 
+                        J'explore en permanence les nouvelles technologies, notamment les <em>LLMs (Large Language Models)</em> et les protocoles <em>MCP (Multi-Agent Systems)</em>, pour créer des logiciels innovants et à fort impact.
+                    </p>
+                    <p>
+                        Mon approche hybride, combinant ingénierie des données et développement full-stack, me permet de concevoir des solutions complètes, depuis l'extraction et le traitement de la donnée jusqu'à sa restitution dans des interfaces utilisateurs intuitives.
+                    </p>
                 </div>
-                <div class="contact-item">
-                    <strong>💻 GitHub</strong>
-                    <a href="https://github.com/MEHDI450" target="_blank">github.com/MEHDI450</a>
-                </div>
-                <div class="contact-item">
-                    <strong>🔗 LinkedIn</strong>
-                    <a href="https://www.linkedin.com/in/mehdi-boutmizgida-03302b2a1/" target="_blank">Profil LinkedIn</a>
+                
+                <!-- Abstract visual representing data/tech -->
+                <div class="relative w-full aspect-square md:aspect-[4/3] rounded-2xl border border-gray-800 bg-card flex items-center justify-center overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-accent/10 to-purple-500/10 opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <i class="fas fa-database text-8xl text-gray-700 group-hover:text-accent transition-colors duration-500 relative z-10 transform group-hover:scale-110"></i>
+                    <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-accent/20 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-1/4 right-1/4 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl"></div>
                 </div>
             </div>
-            <a href="mailto:boutmizgidam@gmail.com" class="cta-button" style="margin-top: 2rem;">Me contacter</a>
+        </div>
+    </section>
+
+    <!-- Compétences Section -->
+    <section id="skills" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Compétences Techniques</h2>
+                <div class="h-px bg-gray-700 flex-1"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Data & AI -->
+                <div class="bg-card border border-gray-800 rounded-xl p-8 card-hover relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-bl-full -z-10"></div>
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6">Data & IA</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">Python</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">SQL</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">Power BI</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">TensorFlow</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">Scikit-Learn</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">Pandas</span>
+                    </div>
+                </div>
+
+                <!-- Web & Backend -->
+                <div class="bg-card border border-gray-800 rounded-xl p-8 card-hover relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-green-500/10 rounded-bl-full -z-10"></div>
+                    <div class="w-12 h-12 bg-green-500/20 text-green-400 rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6">Web & Backend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">JavaScript</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">React</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">Node.js</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">PHP</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <!-- Tools & DB -->
+                <div class="bg-card border border-gray-800 rounded-xl p-8 card-hover relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-bl-full -z-10"></div>
+                    <div class="w-12 h-12 bg-orange-500/20 text-orange-400 rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6">Outils & Bases de données</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">PostgreSQL</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">MySQL</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">Supabase</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">Electron.js</span>
+                        <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">Git</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Expérience Section -->
+    <section id="experience" class="py-24 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Formation & Expériences</h2>
+                <div class="h-px bg-gray-700 flex-1"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="relative border-l border-gray-700 ml-3 md:ml-0 md:pl-8 space-y-12">
+                    
+                    <!-- Form 1 -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="bg-card border border-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="text-xl font-bold text-white">Élève-Ingénieur en Science et Ingénierie des Données</h3>
+                                <span class="text-accent font-medium text-sm mt-2 md:mt-0 bg-accent/10 px-3 py-1 rounded-full w-fit">En cours</span>
+                            </div>
+                            <h4 class="text-lg text-gray-400 mb-2 flex items-center gap-2">
+                                <i class="fas fa-graduation-cap text-gray-500"></i> ENIAD Berkane
+                            </h4>
+                        </div>
+                    </div>
+
+                    <!-- Exp 1 -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="bg-card border border-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="text-xl font-bold text-white">Stage technique Data Engineering</h3>
+                            </div>
+                            <h4 class="text-lg text-gray-400 mb-4 flex items-center gap-2">
+                                <i class="fas fa-building text-gray-500"></i> AREF Fès-Meknès
+                            </h4>
+                            <p class="text-gray-300 leading-relaxed">
+                                Développement de processus ETL, création de tableaux de bord interactifs sur Power BI et développement d'applications de suivi de maintenance (SAV AREF App).
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Exp 2 -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="bg-card border border-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="text-xl font-bold text-white">Freelance Data Engineer & Full-Stack Developer</h3>
+                                <span class="text-accent font-medium text-sm mt-2 md:mt-0 bg-accent/10 px-3 py-1 rounded-full w-fit">Depuis 2024</span>
+                            </div>
+                            <h4 class="text-lg text-gray-400 mb-4 flex items-center gap-2">
+                                <i class="fas fa-globe text-gray-500"></i> Fiverr
+                            </h4>
+                            <p class="text-gray-300 leading-relaxed">
+                                Développement de solutions sur-mesure pour des clients internationaux. 
+                                Création de tableaux de bord personnalisés, intégration de modèles de Machine Learning et automatisation de processus métiers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Form 2 -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="bg-card border border-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="text-xl font-bold text-white">DUT en Ingénierie des Données</h3>
+                            </div>
+                            <h4 class="text-lg text-gray-400 mb-2 flex items-center gap-2">
+                                <i class="fas fa-graduation-cap text-gray-500"></i> EST Fès
+                            </h4>
+                        </div>
+                    </div>
+
+                    <!-- Exp 3 -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="bg-card border border-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="text-xl font-bold text-white">Stage en Développement Web</h3>
+                            </div>
+                            <h4 class="text-lg text-gray-400 mb-4 flex items-center gap-2">
+                                <i class="fas fa-briefcase text-gray-500"></i> SARL AZROU
+                            </h4>
+                            <p class="text-gray-300 leading-relaxed">
+                                Création de A à Z du site web de l'entreprise. 
+                                Conception de l'interface utilisateur, développement frontend/backend et mise en production.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Form 3 -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="bg-card border border-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="text-xl font-bold text-white">Baccalauréat Sciences Physiques</h3>
+                            </div>
+                            <h4 class="text-lg text-gray-400 flex items-center gap-2">
+                                <i class="fas fa-school text-gray-500"></i> Lycée Michlifen
+                            </h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets Section -->
+    <section id="projects" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Projets Réalisés</h2>
+                <div class="h-px bg-gray-700 flex-1"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1: SmartRoute -->
+                <div class="bg-card border border-gray-800 rounded-xl overflow-hidden card-hover flex flex-col h-full">
+                    <div class="h-40 bg-gray-800 relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#38bdf8 1px, transparent 1px); background-size: 20px 20px;"></div>
+                        <i class="fas fa-route text-5xl text-accent z-10"></i>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white">SmartRoute</h3>
+                        </div>
+                        <p class="text-sm text-accent mb-3">Projet de fin d'études DUT</p>
+                        <p class="text-gray-400 mb-6 text-sm flex-1">
+                            Une solution intelligente d'optimisation de trajets et de gestion de tournées. Développée pour valider le DUT en Ingénierie des Données.
+                        </p>
+                        <div class="flex gap-2 mt-auto flex-wrap">
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Python</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Algorithmique</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Analyseur AREF -->
+                <div class="bg-card border border-gray-800 rounded-xl overflow-hidden card-hover flex flex-col h-full">
+                    <div class="h-40 bg-gray-800 relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-blue-900/20"></div>
+                        <i class="fas fa-chart-bar text-5xl text-blue-400 z-10"></i>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white truncate pr-2" title="Analyseur-AREF-F-s-Mekn-s">Analyseur-AREF</h3>
+                            <a href="https://github.com/MEHDI450/Analyseur-AREF-F-s-Mekn-s" target="_blank" class="text-gray-400 hover:text-accent transition-colors"><i class="fab fa-github text-lg"></i></a>
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm flex-1">
+                            Application de visualisation de données éducatives et de suivi pour l'AREF. Intégration de pipelines ETL et création de tableaux de bord.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Power BI</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Logistique-Maroc-Pro -->
+                <div class="bg-card border border-gray-800 rounded-xl overflow-hidden card-hover flex flex-col h-full">
+                    <div class="h-40 bg-gray-800 relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-700 opacity-50"></div>
+                        <i class="fas fa-truck text-5xl text-gray-300 z-10"></i>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white truncate pr-2" title="Logistique-Maroc-Pro">Logistique-Maroc-Pro</h3>
+                            <a href="https://github.com/MEHDI450/Logistique-Maroc-Pro" target="_blank" class="text-gray-400 hover:text-accent transition-colors"><i class="fab fa-github text-lg"></i></a>
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm flex-1">
+                            Application desktop dédiée à la gestion complète d'une flotte logistique (suivi des véhicules, conducteurs, coûts).
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Electron.js</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">SQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Site-Web-Touristique -->
+                <div class="bg-card border border-gray-800 rounded-xl overflow-hidden card-hover flex flex-col h-full">
+                    <div class="h-40 bg-gray-800 relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-teal-900/20"></div>
+                        <i class="fas fa-map-marked-alt text-5xl text-teal-400 z-10"></i>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white truncate pr-2">Site-Web-Touristique</h3>
+                            <a href="https://github.com/MEHDI450/Site-Web-Touristique" target="_blank" class="text-gray-400 hover:text-accent transition-colors"><i class="fab fa-github text-lg"></i></a>
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm flex-1">
+                            Une plateforme web de promotion touristique offrant une interface utilisateur attrayante pour découvrir des destinations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Web Dev</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: Societ-Azrou-Sani-SARL -->
+                <div class="bg-card border border-gray-800 rounded-xl overflow-hidden card-hover flex flex-col h-full">
+                    <div class="h-40 bg-gray-800 relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-yellow-900/20"></div>
+                        <i class="fas fa-building text-5xl text-yellow-500 z-10"></i>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white truncate pr-2">Société Azrou Sani</h3>
+                            <a href="https://github.com/MEHDI450/Societ-Azrou-Sani-SARL" target="_blank" class="text-gray-400 hover:text-accent transition-colors"><i class="fab fa-github text-lg"></i></a>
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm flex-1">
+                            Site vitrine professionnel développé de A à Z (frontend & backend) pour représenter l'entreprise SARL AZROU sur le web.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Full-Stack</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">PHP/JS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 7: SQL_Data_Warehouse_Project -->
+                <div class="bg-card border border-gray-800 rounded-xl overflow-hidden card-hover flex flex-col h-full">
+                    <div class="h-40 bg-gray-800 relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-orange-900/20"></div>
+                        <i class="fas fa-database text-5xl text-orange-400 z-10"></i>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white truncate pr-2" title="SQL_Data_Warehouse_Project">Data Warehouse Project</h3>
+                            <a href="https://github.com/MEHDI450/SQL_Data_Warehouse_Project" target="_blank" class="text-gray-400 hover:text-accent transition-colors"><i class="fab fa-github text-lg"></i></a>
+                        </div>
+                        <p class="text-sm text-accent mb-3">Travail Pratique Académique</p>
+                        <p class="text-gray-400 mb-6 text-sm flex-1">
+                            Projet académique (TP) axé sur la conception, la modélisation en étoile/flocon et l'implémentation complète d'un Data Warehouse.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">SQL</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">ETL</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Modélisation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 8: Triage Medical -->
+                <div class="bg-card border border-gray-800 rounded-xl overflow-hidden card-hover flex flex-col h-full md:col-span-2 lg:col-span-2">
+                    <div class="h-40 bg-gray-800 relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-red-900/20 to-blue-900/20"></div>
+                        <div class="flex gap-4 z-10">
+                            <i class="fas fa-notes-medical text-5xl text-red-400"></i>
+                            <i class="fas fa-network-wired text-5xl text-accent"></i>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white">Triage-Medical-Projet</h3>
+                            <a href="https://github.com/MEHDI450/Triage-Medical-Projet" target="_blank" class="text-gray-400 hover:text-accent transition-colors"><i class="fab fa-github text-lg"></i></a>
+                        </div>
+                        <p class="text-sm text-accent mb-3">Architecture IA Avancée</p>
+                        <p class="text-gray-400 mb-6 text-sm flex-1">
+                            Système de triage médical automatisé multi-agents. Combine les modèles de langage (LLM), le Model Context Protocol (MCP) et la communication Agent-to-Agent (A2A).
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">LLM</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">MCP</span>
+                            <span class="text-xs font-mono text-gray-500 bg-dark px-2 py-1 rounded">Multi-Agent (A2A)</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2024-2025 Mehdi Boutmizgida. Tous droits réservés.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Data Engineer & Full-Stack Developer | Fès-Meknès, Maroc</p>
+    <footer class="bg-darker border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-white mb-6">Contactez-moi</h2>
+            <p class="text-gray-400 mb-8 max-w-md mx-auto">
+                Ouvert aux opportunités et aux collaborations. N'hésitez pas à me contacter pour discuter de projets ou d'idées.
+            </p>
+            <div class="flex justify-center gap-6 mb-12">
+                <a href="mailto:contact@example.com" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-accent hover:bg-gray-700 transition-all">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/mehdi-boutmizgida-03302b2a1/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-accent hover:bg-gray-700 transition-all">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="https://github.com/MEHDI450" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-accent hover:bg-gray-700 transition-all">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+            </div>
+            <p class="text-sm text-gray-600">
+                &copy; <span id="year"></span> Mehdi Boutmizgida. Tous droits réservés.
+            </p>
+        </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop">↑</button>
-
+    <!-- Scripts -->
     <script>
-        // Scroll to Top functionality
-        const scrollTopBtn = document.getElementById('scrollTop');
+        // Update copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on click
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('show');
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
             } else {
-                scrollTopBtn.classList.remove('show');
+                nav.classList.remove('shadow-lg');
+                nav.style.background = 'rgba(15, 23, 42, 0.8)';
             }
-        });
-
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Smooth navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.skill-card, .project-card').forEach(el => {
-            observer.observe(el);
         });
     </script>
 </body>
